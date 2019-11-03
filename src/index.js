@@ -1,15 +1,23 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const seluj = new Discord.Client();
+const CommandParser = require('./commandParser')
+const Command = require('./command.js');
 require('dotenv').config();
 
-client.on('ready', () => {
-    console.log(process.env);
+
+seluj.on('ready', () => {
+
 });
 
-client.on('message', msg => {
-    if (msg.content === 'ping') {
-        msg.reply('pong');
+seluj.on('message', msg => {
+
+    if (CommandParser.prefixe(msg.content) !== Command.PREFIX) {
+        return;
     }
+
+    let command = Command.getCommandByName(CommandParser.command(msg.content));
+
 });
 
-client.login(process.env.TOKEN);
+
+seluj.login(process.env.TOKEN);
