@@ -9,7 +9,7 @@ class Command {
 
     static get PREFIX()
     {
-        return "sel:";
+        return "hei:";
     }
 
     static getCommandByName(name)
