@@ -1,0 +1,23 @@
+{
+  "name": "seluj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingerable/SelujBOT.git"
+  },
+  "author": "jules",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ingerable/SelujBOT/issues"
+  },
+  "homepage": "https://github.com/ingerable/SelujBOT#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "node-opus": "^0.3.3"
+  }
+}
