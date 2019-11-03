@@ -11,7 +11,7 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
 
-    if (CommandParser.prefixe(msg.content) !== Command.PREFIX) {
+    if (CommandParser.prefix(msg.content) !== Command.PREFIX) {
         return;
     }
 

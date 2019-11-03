@@ -5,7 +5,7 @@ let regex = {
 }
 
 module.exports = {
-    prefixe: function(message) {
+    prefix: function(message) {
         return message.substr(0,Command.PREFIX.length);
     },
     command: function(message) {
