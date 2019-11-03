@@ -2,25 +2,25 @@ class Command {
 
     constructor(name, action, description)
     {
-        this.name = name.toLowerCase();
+        this.name = name;
         this.action = action
         this.description = description
     }
 
     static get PREFIX()
     {
-        return "hei:";
+        return "oof:";
     }
 
     static getCommandByName(name)
     {
         for(let i in commands) {
             let command = commands[i];
-            if (command.name === name.toLowerCase()) {
+            if (command.name === name) {
                 return command;
             }
         }
-        console.log("null !");
+
         return null;
     }
 
