@@ -1,15 +1,15 @@
 const Discord = require('discord.js');
-const seluj = new Discord.Client();
+const bot = new Discord.Client();
 const CommandParser = require('./commandParser')
 const Command = require('./command.js');
 require('dotenv').config();
 
 
-seluj.on('ready', () => {
+bot.on('ready', () => {
 
 });
 
-seluj.on('message', msg => {
+bot.on('message', msg => {
 
     if (CommandParser.prefixe(msg.content) !== Command.PREFIX) {
         return;
@@ -17,7 +17,13 @@ seluj.on('message', msg => {
 
     let command = Command.getCommandByName(CommandParser.command(msg.content));
 
+    if (command === null) {
+        msg.channel.send("command not found (fais pas le malin)");
+        return;
+    }
+
+    command.action(bot, msg);
 });
 
 
-seluj.login(process.env.TOKEN);
+bot.login(process.env.TOKEN);

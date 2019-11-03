@@ -20,16 +20,18 @@ class Command {
                 return command;
             }
         }
+        console.log("null !");
+        return null;
     }
 
 }
 
 let commands = new Array(
-    new Command("test1",
-        function () {
-
+    new Command("help",
+        function (bot, message) {
+            message.channel.send("test");
         },
-        "desc1"),
+        ""),
     new Command("test2",
         function () {
 
