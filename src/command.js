@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class Command {
 
     constructor(name, action, description)
@@ -9,7 +11,7 @@ class Command {
 
     static get PREFIX()
     {
-        return "oof:";
+        return "-oof";
     }
 
     static getCommandByName(name)
@@ -29,14 +31,16 @@ class Command {
 let commands = new Array(
     new Command("help",
         function (bot, message) {
-            message.channel.send("test");
-        },
-        ""),
-    new Command("test2",
-        function () {
+            message.channel.send(
+                ' ```Markdown\n' +
+                '# MonText\n' +
+                '``` '
+            );
+        }
+));
 
-        },
-        "desc1")
-);
+fs.readdirSync(__dirname +'/commands/').forEach(file => {
+    console.log(file);
+});
 
 module.exports = Command;
