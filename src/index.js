@@ -1,15 +1,30 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const bot = new Discord.Client();
+const CommandParser = require('./commandParser')
+const Command = require('./command.js');
 require('dotenv').config();
 
-client.on('ready', () => {
-    console.log(process.env);
+bot.on('ready', () => {
+
 });
 
-client.on('message', msg => {
-    if (msg.content === 'ping') {
-        msg.reply('pong');
+bot.on('message', msg => {
+
+    if (CommandParser.prefix(msg.content) !== Command.PREFIX) {
+        return;
     }
+
+    let command = Command.getCommandByName(CommandParser.command(msg.content));
+
+    if (command === null) {
+        msg.channel.send("command not found (fais pas le malin)");
+        return;
+    }
+
+    let args = CommandParser.args(msg.content);
+
+    command.action(bot, msg, args);
 });
 
-client.login(process.env.TOKEN);
+
+bot.login(process.env.TOKEN);
