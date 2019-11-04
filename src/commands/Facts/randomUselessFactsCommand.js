@@ -1,15 +1,24 @@
-const Command = require('./command.js');
-
+let Command = require('../../command');
 let request = require('request');
+let url = "https://uselessfacts.jsph.pl/random.json?language=en"
 
-let randomUselessFactsCommand = new Command('facts', null, null);
+const randomUselessFactsCommand = new Command('fact', null, null);
+
 randomUselessFactsCommand.description = " ```Markdown \n **Usage:** " + Command.PREFIX + " fact";
-randomUselessFactsCommand.action = function () {
-    request('https://uselessfacts.jsph.pl/random.json?language=en', function (error, response, body) {
-        console.log('error:', error);
-        console.log('statusCode:', response && response.statusCode);
-        console.log('body:', body);
+
+randomUselessFactsCommand.action = function (bot, message, args) {
+    request(url, function (error, response, body) {
+        let decodedBody = JSON.parse(body);
+        if (response && response.statusCode === 200) {
+            message.channel.send(decodedBody.text);
+        } else if (response) {
+            message.channel.send("Error");
+            console.log(response.statusCode, error, response.body);
+        } else {
+            console.log("response is null")
+        }
+
     })
 };
 
-modules.exports = randomUselessFactsCommand;
+module.exports = randomUselessFactsCommand;

@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-class Command {
+module.exports = class Command {
 
     constructor(name, action, description)
     {
@@ -28,19 +28,12 @@ class Command {
 
 }
 
-let commands = new Array(
-    new Command("help",
-        function (bot, message) {
-            message.channel.send(
-                ' ```Markdown\n' +
-                '# MonText\n' +
-                '``` '
-            );
-        }
-));
+let commands = new Array();
 
-fs.readdirSync(__dirname +'/commands/').forEach(file => {
-    console.log(file);
+fs.readdirSync(__dirname +'/commands/').forEach(commandsFolder => {
+    fs.readdirSync(__dirname+ '/commands/' + commandsFolder).forEach(command => {
+        let commandObj = require(__dirname+ '/commands/' + commandsFolder + "/" + command);
+        commands.push(commandObj);
+    });
 });
 
-module.exports = Command;

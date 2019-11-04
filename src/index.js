@@ -4,7 +4,6 @@ const CommandParser = require('./commandParser')
 const Command = require('./command.js');
 require('dotenv').config();
 
-
 bot.on('ready', () => {
 
 });
@@ -22,7 +21,9 @@ bot.on('message', msg => {
         return;
     }
 
-    command.action(bot, msg);
+    let args = CommandParser.args(msg.content);
+
+    command.action(bot, msg, args);
 });
 
 
