@@ -3,9 +3,13 @@ let request = require('request');
 let Ligz = require('./Ligz')
 const Discord = require('discord.js');
 
-const lol_summoner = new Command('lol:summoner', null, null);
+const commandName = "lol:summoner";
+const lol_summoner = new Command(commandName, null, null);
 
-lol_summoner.description = " ```Markdown \n **Usage:** " + Command.PREFIX + " lol summoner [summonerName]";
+lol_summoner.embedDescription = new Discord.RichEmbed()
+    .setTitle(commandName)
+    .setDescription("League of Legends: Rankings of a summoner :eyeglasses:")
+    .addField("Usage", Command.PREFIX + " " + commandName + " [summoner name]");
 
 lol_summoner.action = function (bot, message, args) {
 
