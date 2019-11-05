@@ -24,7 +24,7 @@ bot.on('message', msg => {
     let args = CommandParser.args(msg.content);
 
     if (args.length == 1 && args[0] === 'help') {
-        msg.channel.send(command.description);
+        msg.channel.send(command.embedDescription || "no description found");
         return;
     }
 

@@ -1,13 +1,18 @@
 let Command = require('../../command');
 let request = require('request');
 var urlParser = require('url');
+const Discord = require('discord.js');
 require('dotenv').config();
 
 let baseUrl = "https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&api_key=" + process.env.GELBOORU_TOKEN + "&user_id=" + process.env.GELBOORU_USERID;
 let baseRandomUrl = "https://gelbooru.com/index.php?page=post&s=random&api_key=" + process.env.GELBOORU_TOKEN + "&user_id=" + process.env.GELBOORU_USERID;
-const gelbooru = new Command('gelbooru', null, null);
+const commandName = "gelbooru";
+const gelbooru = new Command(commandName, null, null);
 
-gelbooru.description = " ```Markdown \n **Usage:** " + Command.PREFIX + " gelbooru [tag1 tag2 tag3 ...]";
+gelbooru.embedDescription = new Discord.RichEmbed()
+    .setTitle(commandName)
+    .setDescription("Random picture (may be explicit) :thinking:")
+    .addField("Usage", Command.PREFIX + " " + commandName + " [tags1 tags2 ...]");
 
 gelbooru.action = function (bot, message, args) {
     if (typeof args !== 'undefined') {

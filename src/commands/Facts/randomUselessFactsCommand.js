@@ -7,10 +7,10 @@ const commandName = "fact";
 
 const randomUselessFactsCommand = new Command(commandName, null, null);
 
-randomUselessFactsCommand.description =
+randomUselessFactsCommand.embedDescription =
     new Discord.RichEmbed()
         .setTitle(commandName)
-        .setDescription("Useless important fact")
+        .setDescription("Useless important fact :monkey_face:")
         .addField("Usage", Command.PREFIX + " " + commandName);
 
 randomUselessFactsCommand.action = function (bot, message, args) {

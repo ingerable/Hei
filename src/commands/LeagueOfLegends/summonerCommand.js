@@ -6,9 +6,9 @@ const Discord = require('discord.js');
 const commandName = "lol:summoner";
 const lol_summoner = new Command(commandName, null, null);
 
-lol_summoner.description = new Discord.RichEmbed()
+lol_summoner.embedDescription = new Discord.RichEmbed()
     .setTitle(commandName)
-    .setDescription("Data about a summoner")
+    .setDescription("League of Legends: Rankings of a summoner :eyeglasses:")
     .addField("Usage", Command.PREFIX + " " + commandName + " [summoner name]");
 
 lol_summoner.action = function (bot, message, args) {
