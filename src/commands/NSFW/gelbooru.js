@@ -5,7 +5,7 @@ require('dotenv').config();
 let baseUrl = "https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&api_key=" + process.env.GELBOORU_TOKEN + "&user_id=" + process.env.GELBOORU_USERID;
 const gelbooru = new Command('gelbooru', null, null);
 
-gelbooru.description = " ```Markdown \n **Usage:** " + Command.PREFIX + " gelbooru tag1 tag2 tag3 ...";
+gelbooru.description = " ```Markdown \n **Usage:** " + Command.PREFIX + " gelbooru [tag1 tag2 tag3 ...]";
 
 gelbooru.action = function (bot, message, args) {
     if (typeof args !== 'undefined' && args.length > 0) {
@@ -34,6 +34,8 @@ gelbooru.action = function (bot, message, args) {
                 "\n" + randomPictureAttributes.file_url);
         });
     }
+
+    return;
 };
 
 function getRatingName(rating)
