@@ -31,6 +31,7 @@ module.exports = class Command {
 let commands = new Array();
 
 fs.readdirSync(__dirname +'/commands/').forEach(commandsFolder => {
+
     fs.readdirSync(__dirname+ '/commands/' + commandsFolder).forEach(command => {
         let commandObj = require(__dirname+ '/commands/' + commandsFolder + "/" + command);
         commands.push(commandObj);
