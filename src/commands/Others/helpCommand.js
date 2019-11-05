@@ -10,7 +10,7 @@ const helpCommand = new Command(commandName, null, null);
 helpCommand.embedDescription =
     new Discord.RichEmbed()
         .setTitle(commandName)
-        .setDescription(Command.PREFIX + " [yourCommand] [help]")
+        .setDescription(Command.PREFIX + " [commandName] [help]")
         .addField("Usage", Command.PREFIX + " " + commandName);
 
 helpCommand.action = function (bot, message, args) {

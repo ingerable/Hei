@@ -60,20 +60,40 @@ function parseAndSend(error,response, body, message, bot)
         console.log("randomPictureIndex:" + randomPictureIndex, "randomPictureAttributes.length:" + randomPictureAttributes)
         return;
     }
-    message.channel.send("**Score**: " + randomPictureAttributes.score +
-        "\n" + "**"  +getRatingName(randomPictureAttributes.rating) + "**" +
-        "\n" + randomPictureAttributes.file_url);
+
+    let rating = getRating(randomPictureAttributes.rating);
+    let messageEmbed = new Discord.RichEmbed()
+        .setTitle(rating.name)
+        .setImage(randomPictureAttributes.file_url)
+        .setColor(rating.color)
+        .addField("Score",randomPictureAttributes.score)
+
+    message.channel.send(messageEmbed);
+
 }
-function getRatingName(rating)
+
+function getRating(rating)
 {
     if (rating === 's') {
-        return 'Safe';
+        return {
+            name: "Safe :innocent:",
+            color: "#5cff02"
+        };
     } else if (rating === 'q') {
-        return 'Questionnable';
+        return {
+            name: "Questionnable :thinking:",
+            color: "#ff6805"
+        };
     } else if (rating === 'e') {
-        return 'Explicit (oof)';
+        return {
+            name: "Explicit (oof) :scream:",
+            color: "#ff0000"
+        };
     } else {
-        return 'Rating unknow';
+        return {
+            name: 'Rating unknow',
+            color: "#faf1ff"
+        };
     }
 }
 
