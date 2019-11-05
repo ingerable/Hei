@@ -21,3 +21,5 @@ mettre les infos des joueurs
 
 * utiliser le CDN de l'api pour inclure les images + envoyer des messages avec des images en pièces jointes pour ne pas afficher l'hyperlien dans le discord
 http://ddragon.leagueoflegends.com/cdn/9.21.1/img/profileicon/588.png
+
+* générer une page html (template) à partir des données de l'invocateur puis convertir la page html en image et finalement l'envoyer sur discord
