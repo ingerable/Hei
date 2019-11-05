@@ -12,14 +12,11 @@ Usage: -oof gelbooru tags1 tags2 tags3 ...
 
 ### League of legends WIP
 
-mettre les infos des joueurs
+#### Features
 
 -oof lol:summoner [summonerName]
 
-* ajouter l'icone du joueur et de sa division <br>
-[API RIOT](https://developer.riotgames.com/docs/lol#data-dragon_other)
+#### Issues
+[summoner names with spaces not working](https://github.com/ingerable/Oof-Discord-Bot/issues/4)
 
-* utiliser le CDN de l'api pour inclure les images + envoyer des messages avec des images en pièces jointes pour ne pas afficher l'hyperlien dans le discord
-http://ddragon.leagueoflegends.com/cdn/9.21.1/img/profileicon/588.png
 
-* générer une image de badge dynamiquement avec les informations de l'invocateur ?
