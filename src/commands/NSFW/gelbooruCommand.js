@@ -1,5 +1,6 @@
 let Command = require('../../command');
 let request = require('request');
+
 var urlParser = require('url');
 const Discord = require('discord.js');
 require('dotenv').config();
@@ -64,6 +65,7 @@ function parseAndSend(error,response, body, message, bot)
         "\n" + "**"  +getRatingName(randomPictureAttributes.rating) + "**" +
         "\n" + randomPictureAttributes.file_url);
 }
+
 function getRatingName(rating)
 {
     if (rating === 's') {
