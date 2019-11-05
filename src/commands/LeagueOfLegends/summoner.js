@@ -1,20 +1,7 @@
 let Command = require('../../command');
 let request = require('request');
-require('dotenv').config();
-
-let baseUrlSummonerId = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
-let baseUrlSummonerData = "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/";
-
-let baseUrlddragonCdn = "http://ddragon.leagueoflegends.com/cdn/";
-
-
-let ddragonRiotCdn = {
-    version: "9.21.1",
-    image: {
-        profileicon: "/img/profileicon/",
-        extension: "png"
-    }
-};
+let Ligz = require('./Ligz')
+const Discord = require('discord.js');
 
 const lol_summoner = new Command('lol:summoner', null, null);
 
@@ -22,47 +9,54 @@ lol_summoner.description = " ```Markdown \n **Usage:** " + Command.PREFIX + " lo
 
 lol_summoner.action = function (bot, message, args) {
 
-    if (typeof args !== 'undefined' && args.length == 1) {
-
-        let urlSummonerId =  baseUrlSummonerId + args[0] + "?api_key=" + process.env.RIOT_GAMES_TOKEN;
-
-        request(urlSummonerId, function (error, response, body) {
-            if (response && response.statusCode == 200) {
-                requestSummonderData(JSON.parse(body), bot, message);
-            } else {
-                console.log(error, response.statusCode);
-                return null;
-            }
+    if (typeof args !== 'undefined' && args.length === 1) {
+        Ligz.getSummonerInfoByName(args[0], function (summonerInfo) {
+           sendSummonerInfo(summonerInfo, bot, message);
         });
+
+        Ligz.getSummonerRankingByName(args[0], function (summonerRankings) {
+            sendSummonerRanking(summonerRankings, bot, message);
+        })
     }
 
 };
 
-function requestSummonderData(summonerInfo, bot, message)
+function sendSummonerInfo(summonerInfo, bot, message)
 {
-    let urlSummonerData = baseUrlSummonerData + summonerInfo.id +"?api_key=" + process.env.RIOT_GAMES_TOKEN;
-    request(urlSummonerData, function (errror, response, body) {
-        formatMessageSummoner(JSON.parse(body), summonerInfo, bot, message);
-    });
+    let messageEmbed = new Discord.RichEmbed()
+        .setAuthor(summonerInfo.name, summonerInfo.profileIcon)
+        .addField("Level", summonerInfo.summonerLevel);
+    message.channel.send(messageEmbed);
 }
 
-function formatMessageSummoner(summonerDataRank, summonerInfo, bot, message)
+function sendSummonerRanking(summonerRankings, bot, message)
 {
-    let profileIcon = baseUrlddragonCdn + ddragonRiotCdn.version + ddragonRiotCdn.image.profileicon + summonerInfo.profileIconId + "." + ddragonRiotCdn.image.extension;
 
-    console.log(summonerDataRank);
-    message.channel.send("Level: " + summonerInfo.summonerLevel, {
-        embed: {
-            thumbnail: {
-                url: profileIcon,
-                height: 50,
-                width: 50
-            }
-        }
+    summonerRankings.forEach(function (queueRanking) {
+        const attachment = new Discord.Attachment(queueRanking.iconUrl, queueRanking.iconName + ".png");
+
+
+        let messageEmbed = new Discord.RichEmbed()
+            .setTitle(queueRanking.queueType)
+            .attachFile(attachment)
+            .setThumbnail('attachment://' + queueRanking.iconName + ".png")
+            .setColor(queueRanking.color)
+            .addField("Rank",queueRanking.tier + " " + queueRanking.rank + " " + queueRanking.leaguePoints + " LP")
+            .addField("WIN/LOSSES",queueRanking.wins + "W - " + queueRanking.losses + "L " + getWinratePercentage(queueRanking.wins, queueRanking.losses) + "%");
+        message.channel.send(messageEmbed);
     });
+
 
 
 }
 
+function getWinratePercentage(win, losses)
+{
+    if (parseFloat(win) === 0.0) {
+        return 0;
+    }
+    let value = 100 * parseFloat(win) / (parseFloat(win) + parseFloat(losses));
+    return Number(value).toFixed(2);
+}
 
 module.exports = lol_summoner;
