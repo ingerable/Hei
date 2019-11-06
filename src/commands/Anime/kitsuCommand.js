@@ -14,8 +14,8 @@ const kitsuCommand = new Command(commandName, null, null);
 kitsuCommand.embedDescription = new Discord.RichEmbed()
     .setTitle(commandName)
     .setDescription("Random anime or manga character | Random anime")
-
-    .addField("Usage", Command.PREFIX + " " + commandName + " anime|character");
+    .addField("Usage", Command.PREFIX + " " + commandName + " anime")
+    .addField("Usage", Command.PREFIX + " " + commandName + " character");
 
 kitsuCommand.action = function (bot, message, args) {
 
@@ -24,7 +24,7 @@ kitsuCommand.action = function (bot, message, args) {
     } else if (args[0] && args[0] === "character") {
         requestRandomCharacter(message, bot);
     } else {
-        message.channel.send("option unknown :cry:")
+        message.channel.send(this.embedDescription)
         return;
     }
 };
@@ -68,8 +68,8 @@ function requestRandomCharacter(message, bot)
 function createEmbedKitsuAnimeMessage(anime)
 {
     let animeAttributes = anime.attributes;
-
-    return new Discord.RichEmbed()
+    let embedMessage = new Discord.RichEmbed();
+    embedMessage
         .setTitle( (animeAttributes.titles.en_jp || " ") + " | " + (animeAttributes.titles.ja_jp || " "))
         .setDescription(animeAttributes.synopsis || " ")
         .setImage(animeAttributes.coverImage ? animeAttributes.coverImage.original : " ")
