@@ -34,7 +34,6 @@ kitsuCharacter.action = function (bot, message, args) {
 function createEmbedKitsuCharacterMessage(character)
 {
     let characterAttributes = character.attributes;
-    console.log(characterAttributes.)
     let embedMessage = new Discord.RichEmbed();
     return embedMessage
         .setTitle((characterAttributes.names.en || "") + " | " + (characterAttributes.names.ja_jp || ""))
