@@ -68,8 +68,7 @@ function requestRandomCharacter(message, bot)
 function createEmbedKitsuAnimeMessage(anime)
 {
     let animeAttributes = anime.attributes;
-    let embedMessage = new Discord.RichEmbed();
-    embedMessage
+    return new Discord.RichEmbed()
         .setTitle( (animeAttributes.titles.en_jp || " ") + " | " + (animeAttributes.titles.ja_jp || " "))
         .setDescription(animeAttributes.synopsis || " ")
         .setImage(animeAttributes.coverImage ? animeAttributes.coverImage.original : " ")
