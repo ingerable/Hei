@@ -17,6 +17,7 @@ Discord bot with multiple purposes
 
 #### Features
 * -oof fact
+
 Write an useless (important) fact in the channel the command was invoked
 
 ### Gelbooru
@@ -32,9 +33,11 @@ Provide random picture from gelbooru website (may be NSF). The image is in an em
 ### Features
 
 *  -oof kitsu anime
+
 Provide random anime, with its rating, number of episode, synopsis, poster image and end-start date
 
 * -oof kitsu character
+
 Provide random character, with its name and description
 
 
