@@ -15,8 +15,8 @@ const kitsuCommand = new Command(commandName, null, null);
 kitsuCommand.embedDescription = new Discord.RichEmbed()
     .setTitle(commandName)
     .setDescription("Anime information, if no option supplied then it is randomly selected | Random character description")
-    .addField("Usage", Command.PREFIX + " " + commandName + " anime [my anime name]")
-    .addField("Usage", Command.PREFIX + " " + commandName + " character");
+    .addField("Usage", Command.PREFIX + " " + commandName + " anime {my anime name}")
+    .addField("Usage", Command.PREFIX + " " + commandName + " character {my character name}");
 
 kitsuCommand.action = function (bot, message, args) {
 
