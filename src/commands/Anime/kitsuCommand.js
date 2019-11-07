@@ -101,7 +101,8 @@ function createEmbedKitsuAnimeMessage(anime)
         .setThumbnail(animeAttributes.posterImage ? animeAttributes.posterImage.small : " ")
         .addField("Start - End", (animeAttributes.startDate || "?") + " / " + (animeAttributes.endDate || "?"))
         .addField("Episodes", animeAttributes.episodeCount || "?")
-        .addField("Average Rating", (animeAttributes.averageRating == " " ? (animeAttributes.averageRating + "/100") : "?"))
+        .addField("Average Rating", (animeAttributes.averageRating ? (animeAttributes.averageRating + "/100") : "?"))
+        .addField("Rating rank", animeAttributes.ratingRank ? animeAttributes.ratingRank : "?")
         .addField("Popularity Rank", animeAttributes.popularityRank || "?")
 }
 
