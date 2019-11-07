@@ -11,6 +11,10 @@ Discord bot with multiple purposes
 * The JS file must export a [Command](https://github.com/ingerable/Oof-Discord-Bot/blob/master/src/command.js) object 
 * Please fill the different property of the [Command](https://github.com/ingerable/Oof-Discord-Bot/blob/master/src/command.js) based on other command object (see the comment above the class declaration)
 
+#### Symbols
+
+* [option] option is required
+* {option} option is not required
 ### List of available commands
 
 ### Useless fact
@@ -32,7 +36,7 @@ Provide random picture from gelbooru website (may be NSF). The image is in an em
 
 ### Features
 
-*  -oof kitsu anime
+*  -oof kitsu anime {anime name}
 
 Provide random anime, with its rating, number of episode, synopsis, poster image and end-start date
 
