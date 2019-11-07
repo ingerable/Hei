@@ -1,5 +1,7 @@
 # Oof discord bot
 
+Discord bot with multiple purposes
+
 ## Commands
 
 ### Requirement for command creation
@@ -13,15 +15,21 @@
 
 Usage: -oof fact
 
+Write an useless (important) fact in the channel the command was invoked
+
 ### Gelbooru
 
 Usage: -oof gelbooru tags1 tags2 tags3 ...
+
+Provide random picture from gelbooru website (may be NSF). The image is in an embed message so it is deletable.
 
 ### League of legends WIP
 
 #### Features
 
 -oof lol:summoner [summonerName]
+
+Provide ranking information for each queue of the summoner for the euw server (at the moment)
 
 #### Issues
 [summoner names with spaces not working](https://github.com/ingerable/Oof-Discord-Bot/issues/4)
