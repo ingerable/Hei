@@ -27,7 +27,11 @@ kitsuCommand.action = function (bot, message, args) {
             requestRandomAnime(message, bot);
         }
     } else if (args[0] && args[0] === "character") {
-        requestRandomCharacter(message, bot);
+        if (args.length > 1) {
+            requestSpecificCharacter(message, bot, args.slice(1).join(' '))
+        } else {
+            requestRandomCharacter(message, bot);
+        }
     } else {
         message.channel.send(this.embedDescription);
         return;
@@ -41,7 +45,6 @@ function requestSpecificAnime(message, bot, name)
     request(urlGetAnimeByName, (error, response, body) => {
         if (response && response.statusCode === 200 && body) {
            let arrayResponse = JSON.parse(body);
-            console.log(arrayResponse.meta.count);
            //single result , we can send the anime data alone
            if (arrayResponse.meta.count === 1) {
                message.channel.send(createEmbedKitsuAnimeMessage(arrayResponse.data[0]));
@@ -69,6 +72,27 @@ function requestRandomAnime(message, bot)
             if (response.statusCode == 404) {
                 message.channel.send("please retry");
             }
+            return;
+        }
+    })
+}
+
+function requestSpecificCharacter(message, bot, name)
+{
+    let urlGetCharacterByName = urlPrefix + "characters/?filter[slug]=" + Command.slugify(name);
+
+    request(urlGetCharacterByName, function (error, response, body) {
+        if (response && response.statusCode === 200 && body) {
+            let arrayResponse = JSON.parse(body);
+            if (arrayResponse.meta.count === 1) {
+                message.channel.send(createEmbedKitsuCharacterMessage(arrayResponse.data[0]));
+            } else {
+                message.channel.send("no result found :cry: \n");
+                message.channel.send(kitsuCommand.embedDescription);
+                return;
+            }
+        } else {
+            console.log(error, response);
             return;
         }
     })
@@ -109,10 +133,25 @@ function createEmbedKitsuAnimeMessage(anime)
 function createEmbedKitsuCharacterMessage(character)
 {
     let characterAttributes = character.attributes;
+    let description = strip_html_tags(characterAttributes.description);
+
     return new Discord.RichEmbed()
         .setTitle((characterAttributes.names.en || "") + " | " + (characterAttributes.names.ja_jp || ""))
         .setImage(characterAttributes.image ? characterAttributes.image.original : "")
-        .setDescription(characterAttributes.description);
+        .setDescription(trimStringIfExceedN(2048, description));
+}
+
+function strip_html_tags(str)
+{
+    return str.replace(/(<([^>]+)>)/ig,"");
+}
+
+function trimStringIfExceedN(n, str)
+{
+    if (str.length > n) {
+        return str.substr(0, n);
+    }
+    return str;
 }
 
 module.exports = kitsuCommand;
