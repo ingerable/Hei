@@ -22,7 +22,7 @@ Write an useless (important) fact in the channel the command was invoked
 ### Gelbooru
 
 #### Features
-Usage: -oof gelbooru tags1 tags2 tags3 ...
+* -oof gelbooru tags1 tags2 tags3 ...
 
 Provide random picture from gelbooru website (may be NSF). The image is in an embed message so it is deletable.
 
