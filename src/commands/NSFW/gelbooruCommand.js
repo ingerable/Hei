@@ -1,5 +1,6 @@
 let Command = require('../../command');
 let request = require('request');
+let Booru = require('./Booru');
 
 var urlParser = require('url');
 const Discord = require('discord.js');
@@ -61,22 +62,9 @@ function parseAndSend(error,response, body, message, bot)
         console.log("randomPictureIndex:" + randomPictureIndex, "randomPictureAttributes.length:" + randomPictureAttributes)
         return;
     }
-    message.channel.send("**Score**: " + randomPictureAttributes.score +
-        "\n" + "**"  +getRatingName(randomPictureAttributes.rating) + "**" +
-        "\n" + randomPictureAttributes.file_url);
+
+    message.channel.send(Booru.createEmbedMessage(randomPictureAttributes));
 }
 
-function getRatingName(rating)
-{
-    if (rating === 's') {
-        return 'Safe';
-    } else if (rating === 'q') {
-        return 'Questionnable';
-    } else if (rating === 'e') {
-        return 'Explicit (oof)';
-    } else {
-        return 'Rating unknow';
-    }
-}
 
 module.exports = gelbooru;

@@ -5,7 +5,7 @@ const Command = require('./command.js');
 require('dotenv').config();
 
 bot.on('ready', () => {
-
+    bot.user.setActivity("-oof help");
 });
 
 bot.on('message', msg => {
