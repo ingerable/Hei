@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const CommandParser = require('./commandParser')
 const Command = require('./command.js');
-require('dotenv').config();
+require('dotenv').config({path:"../.env"});
 
 bot.on('ready', () => {
     bot.user.setActivity("-oof help");
@@ -30,6 +30,5 @@ bot.on('message', msg => {
 
     command.action(bot, msg, args);
 });
-
 
 bot.login(process.env.TOKEN);
