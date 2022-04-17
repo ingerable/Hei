@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 
+const imageUrlPrefix = 'https://safebooru.org//images/';
+
 /**
  *
  * @param postAttributes array containing interesting attributes of the post (name, file_url, score ...)
@@ -8,10 +10,10 @@ const Discord = require('discord.js');
 function createEmbedMessage(postAttributes)
 {
     let rating = getRating(postAttributes.rating);
-
+	console.log(rating)
     let messageEmbed = new Discord.RichEmbed()
         .setTitle(rating.name)
-        .setImage(postAttributes.file_url)
+        .setImage(imageUrlPrefix + postAttributes.directory + "/" + postAttributes.image)
         .setColor(rating.color)
         .addField("Score",postAttributes.score)
 
@@ -27,7 +29,7 @@ function createEmbedMessage(postAttributes)
  */
 function getRating(rating)
 {
-    if (rating === 's') {
+    if (rating === 'safe') {
         return {
             name: "Safe :innocent:",
             color: "#5cff02"

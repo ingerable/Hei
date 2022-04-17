@@ -62,12 +62,12 @@ function parseAndSend(error,response, body, message, bot)
     let randomPictureIndex = Math.floor(Math.random() * arrayResponse.length);
 
     let randomPictureAttributes = arrayResponse[randomPictureIndex];
-		console.log(randomPictureAttributes)
+
     if (randomPictureAttributes === undefined) {
         console.log("randomPictureIndex:" + randomPictureIndex, "randomPictureAttributes.length:" + randomPictureAttributes)
         return;
     }
-
+	
     message.channel.send(Booru.createEmbedMessage(randomPictureAttributes));
 }
 
